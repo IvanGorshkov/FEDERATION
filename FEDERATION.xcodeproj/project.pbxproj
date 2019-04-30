@@ -13,9 +13,15 @@
 		70307D512278D84600D1D68F /* FEDERATION.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70307D4F2278D84600D1D68F /* FEDERATION.xcdatamodeld */; };
 		70307D532278D84700D1D68F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70307D522278D84700D1D68F /* Assets.xcassets */; };
 		70307D562278D84700D1D68F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70307D542278D84700D1D68F /* LaunchScreen.storyboard */; };
+		70307D5E2278D85500D1D68F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 70307D5D2278D85500D1D68F /* Podfile */; };
+		7090F4842278D8D700B82A3A /* ItemsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7090F4822278D8D700B82A3A /* ItemsModel.swift */; };
+		7090F4852278D8D700B82A3A /* DBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7090F4832278D8D700B82A3A /* DBModel.swift */; };
+		7090F4872278D8DE00B82A3A /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7090F4862278D8DD00B82A3A /* MovieCollectionViewCell.swift */; };
+		DB4DAFC0BADF08414B2B05DA /* Pods_FEDERATION.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5DC286D469199285E33D52 /* Pods_FEDERATION.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B5DC286D469199285E33D52 /* Pods_FEDERATION.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FEDERATION.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70307D452278D84600D1D68F /* FEDERATION.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FEDERATION.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70307D482278D84600D1D68F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70307D4A2278D84600D1D68F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +30,12 @@
 		70307D522278D84700D1D68F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70307D552278D84700D1D68F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		70307D572278D84700D1D68F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70307D5D2278D85500D1D68F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		7090F4822278D8D700B82A3A /* ItemsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsModel.swift; sourceTree = "<group>"; };
+		7090F4832278D8D700B82A3A /* DBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBModel.swift; sourceTree = "<group>"; };
+		7090F4862278D8DD00B82A3A /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		9B4DACA6139463460C8808E0 /* Pods-FEDERATION.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FEDERATION.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FEDERATION/Pods-FEDERATION.debug.xcconfig"; sourceTree = "<group>"; };
+		BF93B2416B56229CDCF16F30 /* Pods-FEDERATION.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FEDERATION.release.xcconfig"; path = "Pods/Target Support Files/Pods-FEDERATION/Pods-FEDERATION.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +43,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB4DAFC0BADF08414B2B05DA /* Pods_FEDERATION.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20D13DD7CCCE0EDD9C284A01 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6B5DC286D469199285E33D52 /* Pods_FEDERATION.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		70307D3C2278D84600D1D68F = {
 			isa = PBXGroup;
 			children = (
+				70307D5D2278D85500D1D68F /* Podfile */,
 				70307D472278D84600D1D68F /* FEDERATION */,
 				70307D462278D84600D1D68F /* Products */,
+				F2FDA37DECCF13B4A6ED67F9 /* Pods */,
+				20D13DD7CCCE0EDD9C284A01 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +80,8 @@
 		70307D472278D84600D1D68F /* FEDERATION */ = {
 			isa = PBXGroup;
 			children = (
+				7090F4862278D8DD00B82A3A /* MovieCollectionViewCell.swift */,
+				7090F4812278D8D700B82A3A /* Model */,
 				70307D482278D84600D1D68F /* AppDelegate.swift */,
 				70307D4A2278D84600D1D68F /* ViewController.swift */,
 				70307D4C2278D84600D1D68F /* Main.storyboard */,
@@ -67,6 +93,24 @@
 			path = FEDERATION;
 			sourceTree = "<group>";
 		};
+		7090F4812278D8D700B82A3A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7090F4822278D8D700B82A3A /* ItemsModel.swift */,
+				7090F4832278D8D700B82A3A /* DBModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F2FDA37DECCF13B4A6ED67F9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9B4DACA6139463460C8808E0 /* Pods-FEDERATION.debug.xcconfig */,
+				BF93B2416B56229CDCF16F30 /* Pods-FEDERATION.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +118,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 70307D5A2278D84700D1D68F /* Build configuration list for PBXNativeTarget "FEDERATION" */;
 			buildPhases = (
+				A9DD5DC4C5B672DDE8C29437 /* [CP] Check Pods Manifest.lock */,
 				70307D412278D84600D1D68F /* Sources */,
 				70307D422278D84600D1D68F /* Frameworks */,
 				70307D432278D84600D1D68F /* Resources */,
+				1904C0ABFF7572109EB4EE40 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,19 +173,62 @@
 			files = (
 				70307D562278D84700D1D68F /* LaunchScreen.storyboard in Resources */,
 				70307D532278D84700D1D68F /* Assets.xcassets in Resources */,
+				70307D5E2278D85500D1D68F /* Podfile in Resources */,
 				70307D4E2278D84600D1D68F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1904C0ABFF7572109EB4EE40 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-FEDERATION/Pods-FEDERATION-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FEDERATION/Pods-FEDERATION-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A9DD5DC4C5B672DDE8C29437 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FEDERATION-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		70307D412278D84600D1D68F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7090F4852278D8D700B82A3A /* DBModel.swift in Sources */,
 				70307D4B2278D84600D1D68F /* ViewController.swift in Sources */,
 				70307D492278D84600D1D68F /* AppDelegate.swift in Sources */,
+				7090F4872278D8DE00B82A3A /* MovieCollectionViewCell.swift in Sources */,
+				7090F4842278D8D700B82A3A /* ItemsModel.swift in Sources */,
 				70307D512278D84600D1D68F /* FEDERATION.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +373,7 @@
 		};
 		70307D5B2278D84700D1D68F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B4DACA6139463460C8808E0 /* Pods-FEDERATION.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -302,6 +392,7 @@
 		};
 		70307D5C2278D84700D1D68F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF93B2416B56229CDCF16F30 /* Pods-FEDERATION.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
