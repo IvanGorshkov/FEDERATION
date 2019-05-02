@@ -8,7 +8,7 @@
 
 import UIKit
 import SDWebImage
-class MovieCollectionViewCell: UICollectionViewCell {
+class ItemCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var info: UILabel!
     @IBOutlet weak var img: UIImageView!
@@ -16,7 +16,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     var menu:ItemsModel? {
         didSet{
             title.text = menu?.name
-            img?.sd_setImage(with: URL(string: self.menu?.img ?? "")!)
+            img?.sd_setImage(with: URL(string: self.menu?.img ?? ""))
             
         }
     }

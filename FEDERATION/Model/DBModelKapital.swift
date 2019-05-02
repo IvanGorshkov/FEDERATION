@@ -8,19 +8,19 @@
 
 import UIKit
 
-protocol DBModelProtocol: class {
-    func itemsDownloaded(items: NSArray)
+protocol DBModelKapitalProtocol: class {
+    func KapitalDownloaded(items: NSArray)
 }
 
-class DBModel: NSObject {
+class DBModelKapital: NSObject {
 
     //properties
     
-    weak var delegate: DBModelProtocol!
+    weak var delegate: DBModelKapitalProtocol!
     
-    let urlPath = "http://db.dragonmaster.ru/service.php" //this will be changed to the path where service.php lives
+    let urlPath = "http://db.dragonmaster.ru/kapitalservice.php" //this will be changed to the path where service.php lives
  
-    func downloadItems() {
+    func downloadPrice() {
         
         let url: URL = URL(string: urlPath)!
         let defaultSession = Foundation.URLSession(configuration: URLSessionConfiguration.default)
@@ -31,6 +31,7 @@ class DBModel: NSObject {
                 print("Failed to download data")
             }else {
                 print("Data downloaded")
+                print(data!)
                 self.parseJSON(data!)
             }
             
@@ -58,21 +59,19 @@ class DBModel: NSObject {
         {
             
             jsonElement = jsonResult[i] as! NSDictionary
-            
+            print(jsonElement)
             let item = ItemsModel()
             
             //the following insures none of the JsonElement values are nil through optional binding
-            if let id = jsonElement["id"] as? String,
-                let img = jsonElement["img"] as? String,
-                let title = jsonElement["title"] as? String,
+            if
+                let quantity = jsonElement["quantity"] as? String,
                 let price = jsonElement["price"] as? String
             {
                 
-                item.name = title
-                item.id = id
+                item.id = quantity
+                print(quantity)
+                print(price)
                 item.price = Int(price)
-                item.img = "http://db.dragonmaster.ru/doc/"+img
-                
                 
             }
             
@@ -82,7 +81,7 @@ class DBModel: NSObject {
         
         DispatchQueue.main.async(execute: { () -> Void in
             
-            self.delegate.itemsDownloaded(items: items)
+            self.delegate.KapitalDownloaded(items: items)
             
         })
     }

@@ -15,7 +15,7 @@ class ItemsModel: NSObject {
     var id: String?
     var img: String?
     var name: String?
-  
+    var price: Int?
     
     
     //empty constructor
@@ -27,11 +27,12 @@ class ItemsModel: NSObject {
     
     //construct with @name, @address, @latitude, and @longitude parameters
     
-    init(id: String, img: String, name: String) {
+    init(id: String, img: String, name: String, price: Int) {
         
         self.id = id
         self.img = img
         self.name = name
+        self.price = price
         
     }
     
