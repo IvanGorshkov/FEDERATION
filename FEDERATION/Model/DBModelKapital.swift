@@ -59,7 +59,7 @@ class DBModelKapital: NSObject {
         {
             
             jsonElement = jsonResult[i] as! NSDictionary
-            print(jsonElement)
+            //print(jsonElement)
             let item = ItemsModel()
             
             //the following insures none of the JsonElement values are nil through optional binding
@@ -69,8 +69,8 @@ class DBModelKapital: NSObject {
             {
                 
                 item.id = quantity
-                print(quantity)
-                print(price)
+              //  print(quantity)
+                //print(price)
                 item.price = Int(price)
                 
             }

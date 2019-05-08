@@ -25,6 +25,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Нажмите да, чтоб добавить фотографию</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Нажмите да, чтоб добавить фотографию</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

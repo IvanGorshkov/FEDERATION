@@ -81,6 +81,11 @@
                         <viewLayoutGuide key="safeArea" id="bN2-GL-qMU"/>
                     </view>
                     <navigationItem key="navigationItem" id="aMa-cr-HnT">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="3eR-F6-osW">
+                            <connections>
+                                <action selector="addItem:" destination="XGR-ag-nDT" id="gIK-jo-gz8"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="hdS-mD-vFd">
                             <connections>
                                 <action selector="Kapital:" destination="XGR-ag-nDT" id="nIR-bn-M6M"/>

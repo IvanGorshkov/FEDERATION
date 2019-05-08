@@ -148,6 +148,9 @@ func tableView(_ tableView: UITableView,
                                                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                                                     let textField = alert?.textFields![0]
                                                     let item: ItemModel = self.items[indexPath.row] as! ItemModel
+                                                    guard textField!.text! != "" else {
+                                                        return
+                                                    }
                                                     self.changeprice(id: Int(item.id!)!, price: Int((textField?.text!)!)!)
                                                     
                                                 }))
@@ -171,6 +174,9 @@ func tableView(_ tableView: UITableView,
                                                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                                                     let textField = alert?.textFields![0]
                                                     let item: ItemModel = self.items[indexPath.row] as! ItemModel
+                                                    guard textField!.text! != "" else {
+                                                        return
+                                                    }
                                                     self.changequal(id: Int(item.id!)!, qual: Int(textField!.text!)!)
                                                     
                                                 }))
@@ -195,24 +201,95 @@ func tableView(_ tableView: UITableView,
             let ourSellAction = UITableViewRowAction(style: .destructive,
                                                     title: ourSell) { (action, indexPath) in
                                                         
+                                                        let alert = UIAlertController(title: "Продажа", message: "Введите ритейл", preferredStyle: .alert)
+                                                        
+                                                        //2. Add the text field. You can configure it however you need.
+                                                        alert.addTextField { (textField) in
+                                                        }
+                                                        
+                                                        // 3. Grab the value from the text field, and print it when the user clicks OK.
+                                                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                                                            let textField = alert?.textFields![0]
+                                                            let item: ItemModel = self.items[indexPath.row] as! ItemModel
+                                                            var profit:Int?
+                                                            guard textField!.text! != "" else {
+                                                                return
+                                                            }
+                                                            if (Int(item.quality!) == 1) {
+                                                                 profit = Int(item.price!)! - Int(textField!.text!)!
+                                                                self.profit(profitint: profit!)
+                                                                self.sell(soldon: Int(item.price!)!)
+                                                                self.removeitem(id: Int(item.id!)!)
+                                                            }
+                                                            else{
+                                                                profit = Int(item.price!)! - Int(textField!.text!)!
+                                                                self.profit(profitint: profit!)
+                                                                self.sell(soldon: Int(item.price!)!)
+                                                                self.reduceQ(reduceQ: Int(item.id!)!)
+                                                            }
+                                                        }))
+                                                        self.present(alert, animated: true, completion: nil)
+                                                        
             }
             
             let implementation = NSLocalizedString("Реализация", comment: "Implementation action")
             let implementationAction = UITableViewRowAction(style: .normal,
                                                       title: implementation) { (action, indexPath) in
+                                                        
+                                                        let alert = UIAlertController(title: "Продажа", message: "Введите процент", preferredStyle: .alert)
+                                                        
+                                                        //2. Add the text field. You can configure it however you need.
+                                                        alert.addTextField { (textField) in
+                                                        }
+                                                        
+                                                        // 3. Grab the value from the text field, and print it when the user clicks OK.
+                                                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                                                            let textField = alert?.textFields![0]
+                                                            let item: ItemModel = self.items[indexPath.row] as! ItemModel
+                                                            var profit:Int?
+                                                            guard textField!.text! != "" else {
+                                                                return
+                                                            }
+                                                            if (Int(item.quality!) == 1) {
+                                                                profit = Int(item.price!)! * Int(textField!.text!)!/100
+                                                                self.profit(profitint: profit!)
+                                                                self.sell(soldon: Int(item.price!)!)
+                                                        self.removeitem(id: Int(item.id!)!)
+                                                            }
+                                                            else{
+                                                                profit = Int(item.price!)! * Int(textField!.text!)!/100
+                                                                
+                                                                self.profit(profitint: profit!)
+                                                                self.sell(soldon: Int(item.price!)!)
+                                                                self.reduceQ(reduceQ: Int(item.id!)!)
+                                                            }
+                                                            
+                                                        }))
+                                                        
+                                                        self.present(alert, animated: true, completion: nil)
+                                                        
+                                                        
                                                        
             }
             let removeOfSelling = NSLocalizedString("Снят с продажи", comment: "Remove from sell")
             let removeOfSellingAction = UITableViewRowAction(style: .normal,
                                                             title: removeOfSelling) { (action, indexPath) in
                                                                 let item: ItemModel = self.items[indexPath.row] as! ItemModel
+                                                                 if (Int(item.quality!) == 1) {
+                                                                    
                                                                 self.removeitem(id: Int(item.id!)!)
+                                                                }
+                                                                 else{
+                                                                    self.reduceQ(reduceQ: Int(item.id!)!)
+                                                                }
             }
             ourSellAction.backgroundColor = .green
             implementationAction.backgroundColor = .init(red: 38/255, green: 177/255, blue: 46/255, alpha: 1)
              removeOfSellingAction.backgroundColor = .red
             return [ourSellAction,implementationAction, removeOfSellingAction]
     }
+    
+    
     
     func changequal(id:Int, qual:Int) {
         
@@ -245,6 +322,109 @@ func tableView(_ tableView: UITableView,
         task.resume()
     }
  
+    func reduceQ(reduceQ:Int) {
+        
+        let request = NSMutableURLRequest(url: NSURL(string: "http://db.dragonmaster.ru/reduceQ_service.php")! as URL)
+        request.httpMethod = "POST"
+        let postString = "a=\(reduceQ)"
+        
+        
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            if error != nil {
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            print("response = \(String(describing: response))")
+            
+            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            print("responseString = \(String(describing: responseString))")
+            
+            DispatchQueue.main.async(execute: { () -> Void in
+                self.getdata(titlename: self.linktitle)
+                self.tableView.reloadData()
+            });
+            
+        }
+        task.resume()
+    }
+    
+     func profit(profitint:Int) {
+        
+        let request = NSMutableURLRequest(url: NSURL(string: "http://db.dragonmaster.ru/profit_service.php")! as URL)
+        request.httpMethod = "POST"
+        
+        let postString = "a=\(profitint)"
+        
+        
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            if error != nil {
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            print("response = \(String(describing: response))")
+            
+            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            print("responseString = \(String(describing: responseString))")
+        }
+        task.resume()
+    }
+    func sell(soldon:Int) {
+        
+        
+        var request = NSMutableURLRequest(url: NSURL(string: "http://db.dragonmaster.ru/QOGService.php")! as URL)
+        
+       var  task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            if error != nil {
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            print("response = \(String(describing: response))")
+            
+            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            print("responseString = \(String(describing: responseString))")
+        }
+        task.resume()
+        
+         request = NSMutableURLRequest(url: NSURL(string: "http://db.dragonmaster.ru/soldon_service.php")! as URL)
+        request.httpMethod = "POST"
+        
+        let postString = "a=\(soldon)"
+        
+        
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        
+         task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            if error != nil {
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            print("response = \(String(describing: response))")
+            
+            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            print("responseString = \(String(describing: responseString))")
+        }
+        task.resume()
+        
+    }
+    
+    
+    
     func changeprice(id:Int, price:Int) {
         
         let request = NSMutableURLRequest(url: NSURL(string: "http://db.dragonmaster.ru/change_price_service.php")! as URL)
@@ -274,6 +454,8 @@ func tableView(_ tableView: UITableView,
         }
         task.resume()
     }
+    
+    
      func removeitem(id:Int) {
         
         let request = NSMutableURLRequest(url: NSURL(string: "http://db.dragonmaster.ru/deleteitem_service.php")! as URL)

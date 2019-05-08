@@ -8,36 +8,38 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate,DBModelProtocol,DBModelKapitalProtocol{
+class ViewController: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate,DBModelProtocol,DBModelKapitalProtocol,DBModelInfoProtocol{
     
-    
+    var refreshController: UIRefreshControl?
     var isFilter = false
     var feedItems: NSArray = NSArray()
     var kapitalItems: NSArray = NSArray()
+    var infoItems: NSArray = NSArray()
     var filterdata : [ItemsModel] = [ItemsModel()]
     var empty = 0
     @IBOutlet weak var collectionview: UICollectionView!
     func KapitalDownloaded(items: NSArray) {
         kapitalItems = items
     }
+    func infoDownloaded(items: NSArray) {
+        infoItems = items
+    }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        filterdata=feedItems as! [ItemsModel]
-        print(filterdata)
-        isFilter=false
-        collectionview.reloadData()
+      
+        isFilter=true
         searchBar.resignFirstResponder()
         searchBar.showsCancelButton = false
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         filterdata=feedItems as! [ItemsModel]
-        print(filterdata)
+        //print(filterdata)
         isFilter=false
         collectionview.reloadData()
          searchBar.resignFirstResponder()
         searchBar.showsCancelButton = false
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
+        //print(searchText)
         filterdata.removeAll()
         empty = 0
         searchBar.showsCancelButton = true
@@ -48,7 +50,7 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
                 empty+=1
                 filterdata.append(feedItems[i] as! ItemsModel)
                 let items: ItemsModel = feedItems[i] as! ItemsModel
-                print(items.name ?? "")
+                //print(items.name ?? "")
                 isFilter=true
                   collectionview.reloadData()
             }
@@ -61,7 +63,7 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
             }
             if (searchText==""){
                 filterdata=feedItems as! [ItemsModel]
-                print(filterdata)
+                //print(filterdata)
                 isFilter=false
                   collectionview.reloadData()
                 return
@@ -86,7 +88,9 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
             kapint=kapint+item.price!*Int(item.id!)!
             countitems=countitems+Int(item.id!)!
         }
-        let alertController = UIAlertController(title: "Информация", message: "Капитализация: \(kapint)₽ \n Количество вещей: \(countitems) \nПродано вещей: 100\nПродано на: 8000₽ \nДоход: 900₽",  preferredStyle: .alert)
+        let info: InfoModel = infoItems[0] as! InfoModel
+        
+        let alertController = UIAlertController(title: "Информация", message: "Капитализация: \(kapint)₽ \n Количество вещей: \(countitems) \nПродано вещей: \( info.qogs ?? "0")\nПродано на: \( info.soldon ?? "0")₽ \nДоход: \(info.profit ?? "0")₽",  preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "OK", style: .default) { (_) -> Void in
         }
         alertController.addAction(cancelAction)
@@ -99,10 +103,10 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
             if isFilter == true{
                 let item: ItemsModel = filterdata[indexPath.row]
                 itemCell.menu =  item
-                     print("2")
+                     //print("2")
             }
             else{
-                print("1")
+                //print("1")
                 let item: ItemsModel = feedItems[indexPath.row] as! ItemsModel
                 itemCell.menu =  item
             }
@@ -118,16 +122,33 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
     
     func itemsDownloaded(items: NSArray) {
         feedItems = items
+       //print(feedItems)
         self.collectionview.reloadData()
+        for i in 0 ..< feedItems.count{
+            let item: ItemsModel = feedItems[i] as! ItemsModel
+            print(item.name)
+        }
     }
     
-
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        let homeModel = DBModel()
+        homeModel.delegate = self
+        homeModel.downloadItems()
+        let kapModel = DBModelKapital()
+        kapModel.delegate = self
+        kapModel.downloadPrice()
+        let infoModel = DBModelInfo()
+        infoModel.delegate = self
+        infoModel.downloadItems()
+        
+    }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         let searchBar = UISearchBar()
         searchBar.sizeToFit()
-        
+       
         searchBar.placeholder = "Поиск..."
         self.navigationController?.navigationBar.topItem?.titleView = searchBar
         searchBar.delegate = self
@@ -135,14 +156,36 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
         self.collectionview.dataSource = self
     self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "ФEDERATION"
+      
+        addRefreshControll()
+        // Do any additional setup after loading the view.
+    }
+    func addRefreshControll(){
+        refreshController=UIRefreshControl()
+        refreshController?.tintColor = UIColor .gray
+        refreshController!.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        collectionview.refreshControl = refreshController
+    }
+    @objc func refresh(){
+         DispatchQueue.global(qos: .background).async { [weak self] in
         let homeModel = DBModel()
         homeModel.delegate = self
         homeModel.downloadItems()
         let kapModel = DBModelKapital()
         kapModel.delegate = self
         kapModel.downloadPrice()
-        // Do any additional setup after loading the view.
+        let infoModel = DBModelInfo()
+        infoModel.delegate = self
+        infoModel.downloadItems()
+         DispatchQueue.main.async(execute: { () -> Void in
+                
+               self?.refreshController?.endRefreshing()
+                //self?.collectionview.reloadData()
+            })
+            
+        }
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
             guard let destinationVC = storyboard?.instantiateViewController(withIdentifier: "SecondViewController") as? SecondViewController else {
@@ -162,5 +205,14 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
     
 }
     
+    @IBAction func addItem(_ sender: Any) {
+        let modal = AddItemViewController()
+        let transitionDelegate = SPStorkTransitioningDelegate()
+        modal.transitioningDelegate = transitionDelegate
+      
+        modal.modalPresentationStyle = .custom
+        modal.countid=feedItems.count
+        self.present(modal, animated: true, completion: nil)
+    }
 }
 
