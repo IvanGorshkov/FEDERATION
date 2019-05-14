@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class AddItemViewController: UIViewController,
 UIImagePickerControllerDelegate,
 UINavigationControllerDelegate
@@ -16,6 +15,7 @@ UINavigationControllerDelegate
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var chooseBuuton: UIButton!
     @IBOutlet var saveBuuton: UIButton!
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var textFieldTitle: UITextField!
     @IBOutlet var textFieldColor: UITextField!
     @IBOutlet var textFieldSize: UITextField!
@@ -39,6 +39,32 @@ UINavigationControllerDelegate
         return randomString
     }
     
+    func keyboardWillHideForResizing(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let viewHeight = self.view.frame.height
+            self.view.frame = CGRect(x: self.view.frame.origin.x,
+                                     y: self.view.frame.origin.y,
+                                     width: self.view.frame.width,
+                                     height: viewHeight + keyboardSize.height)
+        } else {
+            debugPrint("We're about to hide the keyboard and the keyboard size is nil. Now is the rapture.")
+        }
+    }
+    @objc fileprivate func keyboardWillShow(notification:NSNotification) {
+        if let keyboardRectValue = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardRectValue.height
+            
+            scrollView.contentSize = CGSize(width: self.view.frame.width,height: saveBuuton.frame.origin.y+saveBuuton.frame.height+keyboardHeight)
+        }
+     //   scrollView.isScrollEnabled=true
+       
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+     //scrollView.isScrollEnabled=false
+        NotificationCenter.default.addObserver(self, selector: .keyboardWillShow, name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
     @IBAction func SaveClicked() {
         if textFieldQual.text != "",textFieldSize.text != "",textFieldColor.text != "",textFieldPrice.text != "",textFieldTitle.text != "", tmpimage != nil {
         var request = NSMutableURLRequest(url: NSURL(string: "http://db.dragonmaster.ru/saveitem_service.php")! as URL)
@@ -87,7 +113,7 @@ UINavigationControllerDelegate
                                                 if let data = data {
                                                     
                                                     // You can print out response object
-                                                    print("******* response = \(response)")
+                                                    print("******* response = \(String(describing: response))")
                                                     
                                                     print(data.count)
                                                     // you can use data here
@@ -98,13 +124,13 @@ UINavigationControllerDelegate
                                                     
                                                     let json =  try!JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? NSDictionary
                                                     
-                                                    print("json value \(json)")
+                                                    print("json value \(String(describing: json))")
                                                     
                                                     //var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: &err)
                                                     
                                                     
                                                     
-                                                } else if let error = error {
+                                                } else if error != nil {
                                                     
                                                 }
                                                  self.dismiss()
@@ -185,4 +211,7 @@ extension NSMutableData {
         let data = string.data(using: String.Encoding.utf8, allowLossyConversion: true)
         append(data!)
     }
+}
+private extension Selector {
+    static let keyboardWillShow = #selector(AddItemViewController.keyboardWillShow(notification:))
 }

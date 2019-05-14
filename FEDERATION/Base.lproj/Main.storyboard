@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3U0-ws-Neg">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -29,35 +29,38 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="HLz-f8-fVc" customClass="ItemCollectionViewCell" customModule="FEDERATION" customModuleProvider="target">
-                                        <rect key="frame" x="33.5" y="15" width="347" height="218"/>
+                                        <rect key="frame" x="33.666666666666664" y="15" width="347" height="218"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="347" height="218"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LtP-X9-TAQ">
-                                                    <rect key="frame" x="5" y="146" width="338" height="72"/>
+                                                    <rect key="frame" x="4" y="157" width="343" height="56"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="338" id="mty-74-ZYb"/>
+                                                        <constraint firstAttribute="height" constant="56" id="4pG-aw-uWA"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="160-qC-85H">
-                                                    <rect key="frame" x="105" y="0.0" width="138" height="138"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="160-qC-85H">
+                                                    <rect key="frame" x="105" y="0.0" width="137" height="138"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="137" id="EMl-Cd-PQ7"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="LtP-X9-TAQ" secondAttribute="bottom" id="7sv-fR-qfz"/>
-                                            <constraint firstAttribute="trailing" secondItem="LtP-X9-TAQ" secondAttribute="trailing" constant="4" id="9fE-ph-GSm"/>
-                                            <constraint firstItem="LtP-X9-TAQ" firstAttribute="top" secondItem="160-qC-85H" secondAttribute="top" constant="146" id="KPS-2q-NCp"/>
-                                            <constraint firstItem="LtP-X9-TAQ" firstAttribute="leading" secondItem="160-qC-85H" secondAttribute="trailing" constant="-238" id="MkV-E8-FM6"/>
-                                            <constraint firstItem="LtP-X9-TAQ" firstAttribute="top" secondItem="HLz-f8-fVc" secondAttribute="top" constant="146" id="WNn-NY-Dus"/>
-                                            <constraint firstItem="160-qC-85H" firstAttribute="leading" secondItem="HLz-f8-fVc" secondAttribute="leading" constant="105" id="lRr-kE-Ut1"/>
-                                            <constraint firstItem="LtP-X9-TAQ" firstAttribute="bottom" secondItem="160-qC-85H" secondAttribute="bottom" constant="80" id="pNQ-Fa-iqd"/>
+                                            <constraint firstAttribute="bottom" secondItem="LtP-X9-TAQ" secondAttribute="bottom" constant="5" id="2Gf-Rj-3Ry"/>
+                                            <constraint firstItem="160-qC-85H" firstAttribute="top" secondItem="HLz-f8-fVc" secondAttribute="top" id="7Mc-CG-hrK"/>
+                                            <constraint firstItem="160-qC-85H" firstAttribute="centerX" secondItem="HLz-f8-fVc" secondAttribute="centerX" id="Oc1-35-mzz"/>
+                                            <constraint firstAttribute="trailing" secondItem="LtP-X9-TAQ" secondAttribute="trailing" id="cSd-s4-AV0"/>
+                                            <constraint firstItem="LtP-X9-TAQ" firstAttribute="leading" secondItem="HLz-f8-fVc" secondAttribute="leadingMargin" constant="-4" id="mOi-BP-7lc"/>
+                                            <constraint firstItem="160-qC-85H" firstAttribute="top" secondItem="HLz-f8-fVc" secondAttribute="top" id="vsQ-jL-bbs"/>
+                                            <constraint firstItem="LtP-X9-TAQ" firstAttribute="top" secondItem="160-qC-85H" secondAttribute="bottom" constant="19" id="ynI-rd-mW4"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="img" destination="160-qC-85H" id="juU-iC-HOg"/>

@@ -164,6 +164,7 @@
 		7093939B2279B04B00C2B14D /* DBModelKapital.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7093939A2279B04B00C2B14D /* DBModelKapital.swift */; };
 		7093939E2279D56800C2B14D /* icon1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7093939C2279D56800C2B14D /* icon1.jpg */; };
 		7093939F2279D56800C2B14D /* icon2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7093939D2279D56800C2B14D /* icon2.jpg */; };
+		70E0BC0E228B5B0C004F53E3 /* СustomActivityIndicatory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E0BC0D228B5B0B004F53E3 /* СustomActivityIndicatory.swift */; };
 		DB4DAFC0BADF08414B2B05DA /* Pods_FEDERATION.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5DC286D469199285E33D52 /* Pods_FEDERATION.framework */; };
 /* End PBXBuildFile section */
 
@@ -328,6 +329,7 @@
 		7093939A2279B04B00C2B14D /* DBModelKapital.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBModelKapital.swift; sourceTree = "<group>"; };
 		7093939C2279D56800C2B14D /* icon1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon1.jpg; sourceTree = "<group>"; };
 		7093939D2279D56800C2B14D /* icon2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon2.jpg; sourceTree = "<group>"; };
+		70E0BC0D228B5B0B004F53E3 /* СustomActivityIndicatory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "СustomActivityIndicatory.swift"; sourceTree = "<group>"; };
 		9B4DACA6139463460C8808E0 /* Pods-FEDERATION.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FEDERATION.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FEDERATION/Pods-FEDERATION.debug.xcconfig"; sourceTree = "<group>"; };
 		BF93B2416B56229CDCF16F30 /* Pods-FEDERATION.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FEDERATION.release.xcconfig"; path = "Pods/Target Support Files/Pods-FEDERATION/Pods-FEDERATION.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -380,6 +382,7 @@
 				7090F4812278D8D700B82A3A /* Model */,
 				70307D482278D84600D1D68F /* AppDelegate.swift */,
 				70307D4A2278D84600D1D68F /* ViewController.swift */,
+				70E0BC0D228B5B0B004F53E3 /* СustomActivityIndicatory.swift */,
 				7090F48D2279072600B82A3A /* SecondViewController.swift */,
 				7052B8DB227AFCE900787DF7 /* AddItemViewController.swift */,
 				7052B8DC227AFCE900787DF7 /* AddItemViewController.xib */,
@@ -1188,6 +1191,7 @@
 				7052B8AD227AFC2700787DF7 /* SPAppLaunch.swift in Sources */,
 				7052B863227AFC2700787DF7 /* SPTableView.swift in Sources */,
 				7052B86B227AFC2700787DF7 /* SPButton.swift in Sources */,
+				70E0BC0E228B5B0C004F53E3 /* СustomActivityIndicatory.swift in Sources */,
 				7052B899227AFC2700787DF7 /* SPArrayExtension.swift in Sources */,
 				7052B882227AFC2700787DF7 /* SPGolubevIconView.swift in Sources */,
 				7052B8B5227AFC2700787DF7 /* SPShadow.swift in Sources */,
@@ -1398,7 +1402,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dm.pogulaem.com.FEDERATION;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1417,7 +1421,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dm.pogulaem.com.FEDERATION;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

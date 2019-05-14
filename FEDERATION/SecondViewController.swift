@@ -18,6 +18,7 @@ class SecondViewController: UIViewController, UITableViewDelegate,UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none;
         if let castedCell = cell as? TableViewCell {
             let item: ItemModel = items[indexPath.row] as! ItemModel
             castedCell.menu =  item
@@ -58,6 +59,7 @@ class SecondViewController: UIViewController, UITableViewDelegate,UITableViewDat
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        customActivityIndicatory(self.view, startAnimate: true)
         getdata(titlename: linktitle)
     }
     
@@ -112,6 +114,7 @@ class SecondViewController: UIViewController, UITableViewDelegate,UITableViewDat
             }
             DispatchQueue.main.async(execute: { () -> Void in
                 self.items.add(item)
+                customActivityIndicatory(self.view, startAnimate: false)
                self.tableView.reloadData()
             })
             
@@ -485,6 +488,7 @@ func tableView(_ tableView: UITableView,
         }
         task.resume()
     }
+ 
 }
 
 

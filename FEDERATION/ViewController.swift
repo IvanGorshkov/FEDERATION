@@ -23,6 +23,7 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
     }
     func infoDownloaded(items: NSArray) {
         infoItems = items
+        customActivityIndicatory(self.view, startAnimate: false)
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
       
@@ -49,7 +50,7 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
             if(item.name?.lowercased().contains(searchText.lowercased()))!{
                 empty+=1
                 filterdata.append(feedItems[i] as! ItemsModel)
-                let items: ItemsModel = feedItems[i] as! ItemsModel
+                //let items: ItemsModel = feedItems[i] as! ItemsModel
                 //print(items.name ?? "")
                 isFilter=true
                   collectionview.reloadData()
@@ -126,12 +127,13 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
         self.collectionview.reloadData()
         for i in 0 ..< feedItems.count{
             let item: ItemsModel = feedItems[i] as! ItemsModel
-            print(item.name)
+            print(item.name as Any)
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        customActivityIndicatory(self.view, startAnimate: true)
         let homeModel = DBModel()
         homeModel.delegate = self
         homeModel.downloadItems()
@@ -215,4 +217,11 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
         self.present(modal, animated: true, completion: nil)
     }
 }
-
+extension ViewController : UICollectionViewDelegateFlowLayout
+{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        return CGSize(width: collectionView.bounds.width - 40, height: 218)
+        
+}
+}

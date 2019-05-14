@@ -448,14 +448,17 @@ extension SPStorkPresentationController {
     }
     
     private func updateLayoutIndicator() {
-        guard let presentedView = self.presentedView else { return }
+    
         self.indicatorView.style = .line
+        
         self.indicatorView.sizeToFit()
         self.indicatorView.frame.origin.y = 12
-        guard presentedView.frame.width == 375 else {
-            return self.indicatorView.center.x = presentedView.frame.width/2
-        }
-            self.indicatorView.center.x = 414/2
+        
+      
+        self.indicatorView.center.x = (self.containerView?.frame.width)!/2
+
+       
+        
        
     }
     
